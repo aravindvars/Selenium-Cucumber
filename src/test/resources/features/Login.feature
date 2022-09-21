@@ -18,12 +18,14 @@ Feature: WebDriver University - Validating Login Functionality
       | webdriver | xyz123       | validation failed    |
       | sx4###    | s@341        | validation failed    |
 
-#  Scenario: Validating Successful Login Attempt
-#    And I enter password of webdriver123
-#    And I click on Login
-#    Then I should be presented with Validation successful message
-#
-#  Scenario: Validating UnSuccessful Login Attempt
-#    And I enter password of xyz123
-#    And I click on Login
-#    Then I should be presented with Validation unsuccessful message
+  Scenario: Validating Successful Login Attempt
+    When I enter username of webdriver
+    And I enter password of webdriver123
+    And I click on Login
+    Then I should be presented with Validation successful message
+
+  Scenario: Validating UnSuccessful Login Attempt
+    When I enter username of webdriver
+    And I enter password of xyz123
+    And I click on Login
+    Then I should be presented with Validation unsuccessful message

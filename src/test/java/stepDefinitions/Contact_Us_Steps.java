@@ -1,42 +1,31 @@
 package stepDefinitions;
 
 import io.cucumber.java.en.*;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import pageObjects.Base_PO;
 
-import static driver.DriverFactory.getDriver;
 
 
-public class Contact_Us_Steps {
+public class Contact_Us_Steps extends Base_PO {
     private WebDriver driver = getDriver();
 
 
-    public String getRandonNumber(int count)
-    {
-        return RandomStringUtils.randomNumeric(count);
-    }
 
-    public String getRandonString(int count)
-    {
-        return RandomStringUtils.randomAlphabetic(count);
-    }
     @Given("I access webDriver university contact us page")
     public void i_access_web_driver_university_contact_us_page() {
-        driver.get("http://www.webdriveruniversity.com/Contact-Us/contactus.html");
+        navigateTo_URL("http://www.webdriveruniversity.com/Contact-Us/contactus.html");
 
     }
 
     @When("I enter a unique first name")
     public void i_enter_a_unique_first_name() {
-        driver.findElement(By.xpath("//form[@id='contact_form']/input[@name='first_name']")).sendKeys("FN"+getRandonNumber(5));
-
+        sendKeys(By.xpath("//form[@id='contact_form']/input[@name='first_name']"), "FN"+getRandonNumber(5));
     }
     @And("I enter a unique last name")
     public void i_enter_a_unique_last_name() {
-        driver.findElement(By.xpath("//input[@name = 'last_name']")).sendKeys("LN"+getRandonNumber(5));
-
+        sendKeys(By.xpath("//input[@name = 'last_name']"),"LN"+getRandonNumber(5));
     }
     @And("I enter a unique email address")
     public void i_enter_a_unique_email_address() {
@@ -48,7 +37,8 @@ public class Contact_Us_Steps {
         driver.findElement(By.xpath("//textarea[@name='message']")).sendKeys("Comment"+getRandonString(25));
     }
     @When("I click on Submit")
-    public void i_click_on_submit() {
+    public void i_click_on_submit()
+    {
         driver.findElement(By.xpath("//input[@value='SUBMIT']")).click();
     }
 

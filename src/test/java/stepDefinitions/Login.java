@@ -1,18 +1,18 @@
 package stepDefinitions;
-
-
 import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import static driver.DriverFactory.getDriver;
+import pageObjects.Base_PO;
 
 
-public class Login {
+
+
+public class Login extends Base_PO {
     private WebDriver driver = getDriver();
     @Given("I enter Webdriver Login page")
     public void i_enter_webdriver_login_page() {
-        driver.get("http://www.webdriveruniversity.com/Login-Portal/index.html");
+        navigateTo_URL("http://www.webdriveruniversity.com/Login-Portal/index.html");
     }
 
     @When("I enter username of {word}")
