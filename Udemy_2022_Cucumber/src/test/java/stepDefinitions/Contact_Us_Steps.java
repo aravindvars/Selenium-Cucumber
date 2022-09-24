@@ -1,69 +1,70 @@
 package stepDefinitions;
 
 import io.cucumber.java.en.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import pageObjects.Base_PO;
-
+import pageObjects.Contact_Us_PO;
 
 
 public class Contact_Us_Steps extends Base_PO {
     private WebDriver driver = getDriver();
 
+    public Contact_Us_PO contact_us_po;
 
+    public Contact_Us_Steps(Contact_Us_PO contact_us_po)
+    {
+    this.contact_us_po = contact_us_po;
+    }
 
     @Given("I access webDriver university contact us page")
     public void i_access_web_driver_university_contact_us_page() {
-        navigateTo_URL("http://www.webdriveruniversity.com/Contact-Us/contactus.html");
-
+    contact_us_po.navigate_To_WebDriver_Univ_Contact_us_Page();
     }
 
     @When("I enter a unique first name")
     public void i_enter_a_unique_first_name() {
-        sendKeys(By.xpath("//form[@id='contact_form']/input[@name='first_name']"), "FN"+getRandonNumber(5));
+        contact_us_po.setUnique_Firstname();
     }
     @And("I enter a unique last name")
     public void i_enter_a_unique_last_name() {
-        sendKeys(By.xpath("//input[@name = 'last_name']"),"LN"+getRandonNumber(5));
+        contact_us_po.setUnique_Lastname();
     }
     @And("I enter a unique email address")
     public void i_enter_a_unique_email_address() {
-        driver.findElement(By.xpath("//input[@name = 'email']")).sendKeys("em"+getRandonNumber(10)+"@gmail.com");
+        contact_us_po.setUniqueEmail();
 
     }
     @And("I enter a unique comment")
     public void i_enter_a_unique_comment() {
-        driver.findElement(By.xpath("//textarea[@name='message']")).sendKeys("Comment"+getRandonString(25));
+        contact_us_po.setComment();
     }
     @When("I click on Submit")
     public void i_click_on_submit()
     {
-        driver.findElement(By.xpath("//input[@value='SUBMIT']")).click();
+        contact_us_po.click_on_Submit_Button();
     }
 
     @Then("I should be displayed with a Thank you message")
     public void i_should_be_displayed_with_a_thank_you_message() {
-        String text = driver.findElement(By.xpath("//div[@id = 'contact_reply']/h1")).getText();
-        Assert.assertEquals(text,"Thank You for your Message!");
+        contact_us_po.validate_Successful_Message_Text();
     }
     @When("I enter a specific first name {word}")
     public void i_enter_a_specific_first_name_joe(String firstName) {
-driver.findElement(By.xpath("//form[@id='contact_form']/input[@name='first_name']")).sendKeys(firstName);
+    contact_us_po.setSpecific_Firstname(firstName);
     }
     @When("I enter a specific last name {word}")
     public void i_enter_a_specific_last_name_blogs(String lastName) throws InterruptedException {
-        driver.findElement(By.xpath("//input[@name = 'last_name']")).sendKeys(lastName);
+        contact_us_po.setSpecific_Lastname(lastName);
 
     }
     @When("I enter a specific email address {word}")
     public void i_enter_a_specific_email_address_joeblogs_mail_com(String email) {
-        driver.findElement(By.xpath("//input[@name = 'email']")).sendKeys(email);
+        contact_us_po.setSPecific_email(email);
     }
 
     @When("I enter a specific comment {string}")
     public void i_enter_a_specific_comment(String string) {
-        driver.findElement(By.xpath("//textarea[@name='message']")).sendKeys(string);
+        contact_us_po.setSPecific_comment(string);
     }
 
 

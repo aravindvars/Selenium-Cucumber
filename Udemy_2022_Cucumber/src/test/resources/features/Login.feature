@@ -22,10 +22,10 @@ Feature: WebDriver University - Validating Login Functionality
     When I enter username of webdriver
     And I enter password of webdriver123
     And I click on Login
-    Then I should be presented with Validation successful message
+    And I should be see successful login message
 
   Scenario: Validating UnSuccessful Login Attempt
     When I enter username of webdriver
     And I enter password of xyz123
     And I click on Login
-    Then I should be presented with Validation unsuccessful message
+    And I should be see unsuccessful login message
